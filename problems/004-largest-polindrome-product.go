@@ -1,30 +1,17 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
-	"os"
 	"strconv"
-	"strings"
 )
 
-func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 16*1024*1024)
-
-	tTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
-	checkError(err)
-	t := int32(tTemp)
-
-	n := make([]int64, t)
-	for i := 0; i < int(t); i++ {
-		nTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
-		checkError(err)
-		n[i] = nTemp
-	}
-
-	for i := 0; i < int(t); i++ {
-		fmt.Println(largestPalindromeProduct(n[i]))
+func main4() {
+	var t int
+	fmt.Scanln(&t)
+	for range t {
+		var n int64
+		fmt.Scanln(&n)
+		fmt.Println(largestPalindromeProduct(n))
 	}
 }
 
@@ -56,19 +43,4 @@ func isPalindrome(n string) bool {
 		j--
 	}
 	return true
-}
-
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
 }

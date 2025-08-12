@@ -1,30 +1,14 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"io"
-	"os"
-	"strconv"
-	"strings"
-)
+import "fmt"
 
-func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 16*1024*1024)
-
-	tTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
-	checkError(err)
-	t := tTemp
-
-	n := make([]int64, t)
-	for tItr := 0; tItr < int(t); tItr++ {
-		nTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
-		checkError(err)
-		n[tItr] = nTemp
-	}
-
-	for i := int64(0); i < t; i++ {
-		fmt.Println(findSmallestMultiple(n[i]))
+func main5() {
+	var t int
+	fmt.Scanln(&t)
+	for range t {
+		var n int64
+		fmt.Scanln(&n)
+		fmt.Println(findSmallestMultiple(n))
 	}
 }
 
@@ -50,19 +34,4 @@ func gcd(a, b int64) int64 {
 // EKOK (Least Common Multiple)
 func lcm(a, b int64) int64 {
 	return a * b / gcd(a, b)
-}
-
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
 }
